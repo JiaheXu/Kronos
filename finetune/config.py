@@ -73,10 +73,12 @@ class Config:
         # Experiment Logging & Saving
         # =================================================================
         self.use_comet = True # Set to False if you don't want to use Comet ML
+        comet_key = os.getenv("COMET_API_KEY")
         self.comet_config = {
             # It is highly recommended to load secrets from environment variables
             # for security purposes. Example: os.getenv("COMET_API_KEY")
-            "api_key": "se3d3eXtCxSqtZVExPqm0NUDA",
+            
+            "api_key": str(comet_key),            
             "project_name": "Kronos-Finetune-Demo",
             "workspace": "jiahe-xu" # TODO: Change to your Comet ML workspace name
         }
