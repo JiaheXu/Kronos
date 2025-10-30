@@ -38,7 +38,7 @@ class Config:
         self.backtest_time_range = ["2024-07-01", "2025-06-05"]
 
         # TODO: Directory to save the processed, pickled datasets.
-        self.dataset_path = "./data/processed_datasets"
+        self.dataset_path = "../data/processed_datasets"
 
         # =================================================================
         # Training Hyperparameters
@@ -47,7 +47,7 @@ class Config:
 
         self.epochs = 30
         self.log_interval = 100  # Log training status every N batches.
-        self.batch_size = 50  # Batch size per GPU.
+        self.batch_size = 12  # Batch size per GPU.
 
         # Number of samples to draw for one "epoch" of training/validation.
         # This is useful for large datasets where a true epoch is too long.
@@ -76,9 +76,9 @@ class Config:
         self.comet_config = {
             # It is highly recommended to load secrets from environment variables
             # for security purposes. Example: os.getenv("COMET_API_KEY")
-            "api_key": "YOUR_COMET_API_KEY",
+            "api_key": "se3d3eXtCxSqtZVExPqm0NUDA",
             "project_name": "Kronos-Finetune-Demo",
-            "workspace": "your_comet_workspace" # TODO: Change to your Comet ML workspace name
+            "workspace": "jiahe-xu" # TODO: Change to your Comet ML workspace name
         }
         self.comet_tag = 'finetune_demo'
         self.comet_name = 'finetune_demo'
@@ -98,8 +98,8 @@ class Config:
         # =================================================================
         # TODO: Update these paths to your pretrained model locations.
         # These can be local paths or Hugging Face Hub model identifiers.
-        self.pretrained_tokenizer_path = "path/to/your/Kronos-Tokenizer-base"
-        self.pretrained_predictor_path = "path/to/your/Kronos-small"
+        self.pretrained_tokenizer_path = "/home/jiahe/Kronos/data/Kronos-Tokenizer-base"
+        self.pretrained_predictor_path = "/home/jiahe/Kronos/data/Kronos-base"
 
         # Paths to the fine-tuned models, derived from the save_path.
         # These will be generated automatically during training.

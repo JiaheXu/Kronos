@@ -213,53 +213,12 @@ def main(config: dict):
     tokenizer = KronosTokenizer.from_pretrained(config['finetuned_tokenizer_path'])
     tokenizer.eval().to(device)
 
-
-    # Args:
-    #     s1_bits (int): Number of bits for pre tokens.
-    #     s2_bits (int): Number of bits for post tokens.
-    #     n_layers (int): Number of Transformer blocks.
-    #     d_model (int): Dimension of the model's embeddings and hidden states.
-    #     n_heads (int): Number of attention heads in the MultiheadAttention layers.
-    #     ff_dim (int): Dimension of the feedforward network in the Transformer blocks.
-    #     ffn_dropout_p (float): Dropout probability for the feedforward network.
-    #     attn_dropout_p (float): Dropout probability for the attention layers.
-    #     resid_dropout_p (float): Dropout probability for residual connections.
-    #     token_dropout_p (float): Dropout probability for token embeddings.
-    #     learn_te (bool): Whether to use learnable temporal embeddings.
-
-    # attn_dropout_p = 0.0
-    # d_model = 1664
-    # ff_dim = 3072
-    # ffn_dropout_p = 0.0
-    # learn_te = True
-    # n_heads = 32
-    # n_layers = 18
-    # resid_dropout_p = 0.0
-    # s1_bits = 10
-    # s2_bits = 10
-    # token_dropout_p = 0.0
-
-    model = Kronos(
-        d_model = 1664,
-        ff_dim = 3072,
-        ffn_dropout_p = 0.0,
-        learn_te = True,
-        n_heads = 32,
-        n_layers = 18,
-        resid_dropout_p = 0.0,
-        s1_bits = 10,
-        s2_bits = 10,
-        token_dropout_p = 0.0,
-        attn_dropout_p = 0.0,
-    )
-
+    model = Kronos.from_pretrained(config['pretrained_predictor_path'])
     model.to(device)
     model = DDP(model, device_ids=[local_rank], find_unused_parameters=False)
 
     if rank == 0:
         print(f"Predictor Model Size: {get_model_size(model.module)}")
-
-    print("config: ", config )
 
     # Start Training
     dt_result = train_model(
